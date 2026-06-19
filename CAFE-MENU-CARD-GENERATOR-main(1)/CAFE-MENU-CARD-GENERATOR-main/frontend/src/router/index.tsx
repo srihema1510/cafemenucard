@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createHashRouter, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
 import AppShell from '../components/layout/AppShell';
 import Login from '../pages/Login';
@@ -7,7 +7,7 @@ import Menu from '../pages/Menu';
 import Settings from '../pages/Settings';
 import Templates from '../pages/Templates';
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/login',
     element: <Login />,
