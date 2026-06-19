@@ -1,0 +1,201 @@
+/* Template06_ArchitectureInspired.css — Cyberpunk & Mono Bold */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap');
+
+/* ── Root Container ── */
+.t06-root {
+  width: 100%;
+  height: 100%;
+  background-color: #0b0b0d;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #e2e8f0;
+  box-sizing: border-box;
+}
+
+/* ── Frame Border ── */
+.t06-industrial-frame {
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(226, 232, 240, 0.25);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Corner Markings ── */
+.t06-corner-mark {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #FF4500;
+  z-index: 2;
+  pointer-events: none;
+}
+.t06-corner-mark--tl { top: 16px; left: 16px; border-right: none; border-bottom: none; }
+.t06-corner-mark--tr { top: 16px; right: 16px; border-left: none; border-bottom: none; }
+.t06-corner-mark--bl { bottom: 16px; left: 16px; border-right: none; border-top: none; }
+.t06-corner-mark--br { bottom: 16px; right: 16px; border-left: none; border-top: none; }
+
+/* ── Content Container ── */
+.t06-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 48px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.t06-content::-webkit-scrollbar { display: none; }
+
+/* ── Header Title ── */
+.t06-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+.t06-brand-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #0b0b0d;
+  background-color: #FF4500;
+  padding: 2px 8px;
+  margin-bottom: 6px;
+}
+
+.t06-title {
+  font-size: 38px;
+  font-weight: 900;
+  text-align: center;
+  color: #fff;
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.t06-subtitle {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: #FF4500;
+  margin-top: 8px;
+}
+
+/* ── Dynamic Sections ── */
+.t06-sections-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 10px;
+}
+
+.t06-section-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.t06-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.t06-section-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #FF4500;
+}
+
+.t06-section-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Items List ── */
+.t06-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.t06-item-node {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding-left: 14px;
+  border-left: 1px solid rgba(226, 232, 240, 0.15);
+}
+
+.t06-item-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.t06-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+}
+
+.t06-item-title {
+  font-weight: 700;
+  font-size: 12px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.t06-item-line {
+  flex-grow: 1;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.1);
+  margin: 0 6px;
+  min-width: 8px;
+}
+
+.t06-item-price {
+  font-weight: 700;
+  font-size: 12px;
+  color: #FF4500;
+  flex-shrink: 0;
+}
+
+.t06-item-desc {
+  font-size: 10px;
+  color: #94a3b8;
+  margin: 3px 0 0;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+.t06-item-image {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: block;
+}
