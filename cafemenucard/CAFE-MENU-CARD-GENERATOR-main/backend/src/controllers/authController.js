@@ -22,17 +22,20 @@ const login = async (req, res) => {
 
     const tokens = generateTokens(admin);
 
-    res.cookie('accessToken', tokens.accessToken, {
+    const isProd = process.env.NODE_ENV === 'production';
+    const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: true, // Must be true for sameSite: 'none'
+      sameSite: 'none', // Required for cross-domain cookies (Vercel -> Render)
+    };
+
+    res.cookie('accessToken', tokens.accessToken, {
+      ...cookieOptions,
       maxAge: 15 * 60 * 1000 // 15 minutes
     });
 
     res.cookie('refreshToken', tokens.refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
@@ -44,8 +47,14 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie('accessToken');
-  res.clearCookie('refreshToken');
+  const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none'
+  };
+
+  res.clearCookie('accessToken', cookieOptions);
+  res.clearCookie('refreshToken', cookieOptions);
   return success(res, null, 'Logged out successfully');
 };
 
