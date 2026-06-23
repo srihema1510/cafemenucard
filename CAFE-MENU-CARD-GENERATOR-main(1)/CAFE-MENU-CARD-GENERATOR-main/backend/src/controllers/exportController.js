@@ -1,14 +1,14 @@
 const db = require('../config/db');
 const { success, error } = require('../utils/response');
 
-const logExport = (req, res) => {
+const logExport = async (req, res) => {
   try {
     const { template_id, action } = req.body;
     
-    db.prepare('INSERT INTO activity_logs (action, description) VALUES (?, ?)').run(
+    await db.query('INSERT INTO activity_logs (action, description) VALUES ($1, $2)', [
       action || 'download',
       `Exported template ID: ${template_id}`
-    );
+    ]);
 
     return success(res, null, 'Export logged successfully', 201);
   } catch (err) {

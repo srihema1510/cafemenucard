@@ -1,9 +1,10 @@
 const db = require('../config/db');
 const { success, error } = require('../utils/response');
 
-const getCafeInfo = (req, res) => {
+const getCafeInfo = async (req, res) => {
   try {
-    const cafe = db.prepare('SELECT id, cafe_name, updated_at FROM cafe_info WHERE id = 1').get();
+    const cafeRes = await db.query('SELECT id, cafe_name, updated_at FROM cafe_info WHERE id = 1');
+    const cafe = cafeRes.rows[0];
     if (!cafe) {
       return error(res, 'Cafe info not found', null, 404);
     }
@@ -14,16 +15,16 @@ const getCafeInfo = (req, res) => {
   }
 };
 
-const updateCafeInfo = (req, res) => {
+const updateCafeInfo = async (req, res) => {
   try {
     const { cafe_name } = req.body;
-    db.prepare('UPDATE cafe_info SET cafe_name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = 1').run(cafe_name);
+    await db.query('UPDATE cafe_info SET cafe_name = $1, updated_at = CURRENT_TIMESTAMP WHERE id = 1', [cafe_name]);
     
     // Log the action
-    db.prepare('INSERT INTO activity_logs (action, description) VALUES (?, ?)').run(
+    await db.query('INSERT INTO activity_logs (action, description) VALUES ($1, $2)', [
       'update_cafe',
       `Updated cafe name to ${cafe_name}`
-    );
+    ]);
 
     return success(res, { cafe_name }, 'Cafe info updated successfully');
   } catch (err) {

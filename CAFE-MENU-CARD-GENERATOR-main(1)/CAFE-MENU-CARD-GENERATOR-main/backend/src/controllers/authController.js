@@ -7,7 +7,8 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const admin = db.prepare('SELECT * FROM admin WHERE email = ?').get(email);
+    const adminRes = await db.query('SELECT * FROM admin WHERE email = $1', [email]);
+    const admin = adminRes.rows[0];
 
     if (!admin) {
       return error(res, 'Invalid credentials', 'User not found', 401);
