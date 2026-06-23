@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const db = require('../config/db');
-const { generateTokens } = require('../config/jwt');
+const { generateTokens, verifyAccessToken } = require('../config/jwt');
 const { success, error } = require('../utils/response');
 
 const login = async (req, res) => {
@@ -50,7 +50,17 @@ const logout = (req, res) => {
 };
 
 const getProfile = (req, res) => {
-  const { id, email } = req.user;
+  const token = req.cookies.accessToken;
+  if (!token) {
+    return res.status(200).json({ success: false, message: 'No token provided' });
+  }
+
+  const user = verifyAccessToken(token);
+  if (!user) {
+    return res.status(200).json({ success: false, message: 'Invalid or expired token' });
+  }
+
+  const { id, email } = user;
   return success(res, { id, email }, 'Profile fetched successfully');
 };
 

@@ -19,6 +19,6 @@ router.post('/login',
 
 router.post('/logout', authenticate, logout);
 
-router.get('/profile', authenticate, getProfile);
+router.get('/profile', getProfile);
 
 module.exports = router;
