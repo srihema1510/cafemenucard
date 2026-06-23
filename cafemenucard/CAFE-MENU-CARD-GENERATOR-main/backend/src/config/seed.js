@@ -6,7 +6,7 @@ const initDB = async () => {
     // Create tables
     await db.query(`
       CREATE TABLE IF NOT EXISTS admin (
-        id SERIAL PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         email TEXT NOT NULL UNIQUE,
         password_hash TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -14,13 +14,13 @@ const initDB = async () => {
       );
 
       CREATE TABLE IF NOT EXISTS cafe_info (
-        id SERIAL PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         cafe_name TEXT NOT NULL DEFAULT 'My Cafe',
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
 
       CREATE TABLE IF NOT EXISTS categories (
-        id SERIAL PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         template_id INTEGER NOT NULL DEFAULT 1,
         name TEXT NOT NULL,
         display_order INTEGER NOT NULL DEFAULT 0,
@@ -29,7 +29,7 @@ const initDB = async () => {
       );
 
       CREATE TABLE IF NOT EXISTS menu_items (
-        id SERIAL PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         template_id INTEGER NOT NULL DEFAULT 1,
         category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
         item_name TEXT NOT NULL,
@@ -40,7 +40,7 @@ const initDB = async () => {
       );
 
       CREATE TABLE IF NOT EXISTS activity_logs (
-        id SERIAL PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         action TEXT NOT NULL,
         description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
