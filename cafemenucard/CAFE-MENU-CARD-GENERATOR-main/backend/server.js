@@ -39,6 +39,11 @@ app.use('/api/categories', categoriesRoutes);
 app.use('/api/menu-items', menuRoutes);
 app.use('/api/export', exportRoutes);
 
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'API is running' });
+});
+
 // Error Handler
 app.use(errorHandler);
 

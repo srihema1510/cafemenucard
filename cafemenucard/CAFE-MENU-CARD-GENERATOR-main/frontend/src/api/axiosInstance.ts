@@ -1,6 +1,12 @@
 import axios from 'axios';
 
 let baseURL = import.meta.env.VITE_API_URL || `${window.location.protocol}//${window.location.hostname}:5001/api`;
+
+// Autocorrect if user forgot /api in their VITE_API_URL
+if (import.meta.env.VITE_API_URL && !baseURL.includes('/api')) {
+  baseURL = baseURL.endsWith('/') ? baseURL + 'api' : baseURL + '/api';
+}
+
 if (!baseURL.endsWith('/')) {
   baseURL += '/';
 }
