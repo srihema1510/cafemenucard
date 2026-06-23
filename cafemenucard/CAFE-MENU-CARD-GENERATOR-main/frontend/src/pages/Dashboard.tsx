@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useMenu } from '../hooks/useMenu';
 import { Layers, Coffee, FileText, IndianRupee } from 'lucide-react';
 import { useMenuStore } from '../store/menuStore';
@@ -47,12 +48,12 @@ export default function Dashboard() {
       <div className="bg-card rounded-xl border border-border p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h3>
         <div className="flex gap-4">
-          <a href="/menu" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+          <Link to="/menu" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
             Manage Menu
-          </a>
-          <a href="/templates" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2">
+          </Link>
+          <Link to="/templates" className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2">
             View Templates
-          </a>
+          </Link>
         </div>
       </div>
     </div>
